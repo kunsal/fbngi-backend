@@ -22,6 +22,7 @@ class BaseModel {
     if (single) {
       text += ' LIMIT 1';
     } 
+  
     let values = [ value ];
     return this.query(text, values);
   }
@@ -36,35 +37,6 @@ class BaseModel {
     const parameters = this.parameterize(values);
     const text = `INSERT INTO ${this.table} (${fields}) VALUES (${parameters}) RETURNING *`;
     return this.query(text, values); 
-  }
-
-  /**
-   * Delete model record
-   * @param {string} field 
-   * @param {string} value 
-   */
-  async delete(field, value) {
-    let text = `DELETE FROM ${this.table} WHERE ${field} = $1 RETURNING *`;
-    let values = [ value ];
-    return this.query(text, values);
-  }
-
-  /**
-   * Update model
-   * @param {object} data 
-   * @param {string} filterValue [filter value]
-   * @param {string} filterField [filter field]
-   */
-  async update(data, filterValue, filterField = 'id') {
-    const fields = Object.keys(data);
-    let count = 1;
-    let setData = [];
-    fields.map(field => {
-      setData.push(`${field} = $${count}`);
-      count ++;
-    });
-    let text = `UPDATE ${this.table} SET ${setData} WHERE ${filterField} = ${filterValue} RETURNING *`;
-    return this.query(text, Object.values(data)); 
   }
 
   /**
