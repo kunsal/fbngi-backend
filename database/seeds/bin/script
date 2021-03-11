@@ -1,0 +1,5 @@
+#!/bin/bash
+
+chmod u+x ./database/seeds/*
+# node ./database/seeds/user create
+# node ./database/seeds/investments create

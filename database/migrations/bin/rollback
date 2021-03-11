@@ -1,0 +1,5 @@
+#!/bin/bash
+chmod u+x ./database/migrations/*
+# ./database/migrations/create-users-table down
+./database/migrations/create-investments-table down
+

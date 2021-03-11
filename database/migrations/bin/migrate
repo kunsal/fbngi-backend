@@ -1,0 +1,6 @@
+#!/bin/bash
+chmod u+x ./database/migrations/*
+# node ./database/migrations/create-users-table.js up
+node ./database/migrations/create-investments-table.js up
+
+
