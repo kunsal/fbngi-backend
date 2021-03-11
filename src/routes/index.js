@@ -7,7 +7,8 @@ dotenv.config();
 
 const router = express.Router();
 const urlPrefix = '/api/v1'
-router.post(`/api/v1/user/login`, userController.login);
-router.get(`${urlPrefix}/investments/me`,[authMiddleware], investmentController.summary)
+router.post(`${urlPrefix}/user/login`, userController.login);
+router.get(`${urlPrefix}/investments/me`,[authMiddleware], investmentController.me)
+router.get(`${urlPrefix}/investments/:id`,[authMiddleware], investmentController.summary)
 
 module.exports = router;

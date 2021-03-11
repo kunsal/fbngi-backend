@@ -18,12 +18,23 @@ class BaseModel {
    * @param {boolean} single 
    */
   async findBy(field, value, single = false) {
-    let text = `SELECT * FROM ${this.table} WHERE ${field} = $1`;
+    let text = '';
+    
+    if (typeof field === 'object') {
+      text += `SELECT * FROM ${this.table} WHERE `;
+      for (let i = 0; i < field.length; i++) {
+        text += `${field[i]} = $${i + 1} `
+        text += i < field.length - 1 ? ' and ' : '';
+      }
+    } else {
+      text += `SELECT * FROM ${this.table} WHERE ${field} = $1`;
+    }
+    
     if (single) {
       text += ' LIMIT 1';
     } 
-  
-    let values = [ value ];
+    
+    let values = typeof value === 'object' ? value : [ value ];
     return this.query(text, values);
   }
 
