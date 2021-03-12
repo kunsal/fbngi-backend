@@ -9,6 +9,7 @@ const router = express.Router();
 const urlPrefix = '/api/v1'
 router.post(`${urlPrefix}/user/login`, userController.login);
 router.get(`${urlPrefix}/investments/me`,[authMiddleware], investmentController.me)
-router.get(`${urlPrefix}/investments/:id`,[authMiddleware], investmentController.summary)
+router.get(`${urlPrefix}/investments/me/total`,[authMiddleware], investmentController.total)
+
 
 module.exports = router;
