@@ -12,7 +12,7 @@ describe('User', () => {
       chai.request(app)
           .post(endpoint)
           .send({
-            email: '',
+            email: '', 
           })
           .end((err, res) => {
             expect(res.status).to.equal(400);
